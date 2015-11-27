@@ -1,4 +1,4 @@
-package com.codingthrough.geeksforgeeks.datastructure.linkedlist;
+package com.codingthrough.geeksforgeeks.ds.linkedlist;
 
 /**
  * Merges two specified linked list in the sorted order.
@@ -15,24 +15,14 @@ public class Merge {
         Node<T> dummy = new Node<>();
         Node<T> cur = dummy;
         while (a != null && b != null) {
-            if (a.data == null) {
+            if (compare(a.data, b.data) <= 0) {
                 cur.next = new Node<>(a.data, null);
                 cur = cur.next;
                 a = a.next;
-            } else if (b.data == null) {
+            } else {
                 cur.next = new Node<>(b.data, null);
                 cur = cur.next;
                 b = b.next;
-            } else {
-                if (a.data.compareTo(b.data) < 0) {
-                    cur.next = new Node<>(a.data, null);
-                    cur = cur.next;
-                    a = a.next;
-                } else {
-                    cur.next = new Node<>(b.data, null);
-                    cur = cur.next;
-                    b = b.next;
-                }
             }
         }
 
@@ -60,23 +50,25 @@ public class Merge {
         }
 
         if (a != null && b != null) {
-            if (a.data == null) {
+            if (compare(a.data, b.data) <= 0) {
                 Node<T> next = mergeRecursive(a.next, b);
                 return new Node<>(a.data, next);
-            } else if (b.data == null) {
+            } else {
                 Node<T> next = mergeRecursive(a, b.next);
                 return new Node<>(b.data, next);
-            } else {
-                if (a.data.compareTo(b.data) < 0) {
-                    Node<T> next = mergeRecursive(a.next, b);
-                    return new Node<>(a.data, next);
-                } else {
-                    Node<T> next = mergeRecursive(a, b.next);
-                    return new Node<>(b.data, next);
-                }
             }
         }
 
         return a != null ? a : b;
+    }
+
+    private static <T extends Comparable<T>> int compare(T a, T b) {
+        if (a == null) {
+            return -1;
+        } else if (b == null) {
+            return 1;
+        } else {
+            return a.compareTo(b);
+        }
     }
 }

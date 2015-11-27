@@ -1,11 +1,11 @@
-package com.codingthrough.geeksforgeeks.datastructure.linkedlist;
+package com.codingthrough.geeksforgeeks.ds.linkedlist;
 
 /**
- * Provides algorithm to delete middle/last node from the list when only pointer to the deleted node is spesified.
+ * Provides algorithm to delete node from the list when only pointer to the deleted node is specified.
  */
 public class DeleteFast {
     /**
-     * Removed middle node from the linked list.
+     * Removes first/middle node from the linked list.
      *
      * @param node element to be deleted
      */
@@ -15,14 +15,16 @@ public class DeleteFast {
         }
 
         Node next = node.next;
-        if (next != null) {
-            node.data = next.data;
-            node.next = next.next;
+        if (next == null) {
+            throw new IllegalArgumentException("Cannot delete the last element from the list.");
         }
+
+        node.data = next.data;
+        node.next = next.next;
     }
 
     /**
-     * Removed middle or last node from the double linked list.
+     * Removes node from the double linked list.
      *
      * @param node element to be deleted
      */

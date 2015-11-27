@@ -1,4 +1,4 @@
-package com.codingthrough.geeksforgeeks.datastructure.linkedlist;
+package com.codingthrough.geeksforgeeks.ds.linkedlist;
 
 /**
  * Represents one element in the double linked list.

@@ -1,4 +1,4 @@
-package com.codingthrough.geeksforgeeks.datastructure.linkedlist;
+package com.codingthrough.geeksforgeeks.ds.linkedlist;
 
 /**
  * Finds the length of the linked list using iterative/recursive approaches
@@ -10,7 +10,7 @@ public class Length {
      * @param head the first element of the list
      * @return the number of elements in the list
      */
-    public static int length(Node head) {
+    public static <T> int length(Node<T> head) {
         int length = 0;
         while (head != null) {
             length++;
@@ -25,7 +25,7 @@ public class Length {
      * @param head the first element of the list
      * @return the number of elements in the list
      */
-    public static int lengthRecursive(Node head) {
+    public static <T> int lengthRecursive(Node<T> head) {
         if (head == null) {
             return 0;
         }

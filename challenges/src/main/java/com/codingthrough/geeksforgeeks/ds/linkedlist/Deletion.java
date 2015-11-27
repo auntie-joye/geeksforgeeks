@@ -1,4 +1,4 @@
-package com.codingthrough.geeksforgeeks.datastructure.linkedlist;
+package com.codingthrough.geeksforgeeks.ds.linkedlist;
 
 /**
  * Provides different ways to remove node from the linked list.

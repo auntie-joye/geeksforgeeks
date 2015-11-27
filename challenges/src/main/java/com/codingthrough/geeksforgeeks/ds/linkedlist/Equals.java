@@ -1,4 +1,4 @@
-package com.codingthrough.geeksforgeeks.datastructure.linkedlist;
+package com.codingthrough.geeksforgeeks.ds.linkedlist;
 
 /**
  * Checks either the specified lists are identical or not.
@@ -13,14 +13,14 @@ public class Equals {
      */
     public static boolean equals(Node a, Node b) {
         while (a != null && b != null) {
-            if (!a.data.equals(b.data)) {
+            if (!equals(a.data, b.data)) {
                 return false;
             }
             a = a.next;
             b = b.next;
         }
 
-        return b == null;
+        return a == null && b == null;
     }
 
     /**
@@ -35,6 +35,11 @@ public class Equals {
             return b == null;
         }
 
-        return a.data.equals(b.data) && equals(a.next, b.next);
+        return b != null && equals(a.data, b.data) && equals(a.next, b.next);
+
+    }
+
+    private static <T> boolean equals(T a, T b) {
+        return ((a == null && b == null) || (a != null && a.equals(b)));
     }
 }
