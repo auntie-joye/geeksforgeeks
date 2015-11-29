@@ -12,7 +12,6 @@
 
     <modules>
         <module>challenges</module>
-        <module>challenges-tests</module>
     </modules>
 
     <build>
