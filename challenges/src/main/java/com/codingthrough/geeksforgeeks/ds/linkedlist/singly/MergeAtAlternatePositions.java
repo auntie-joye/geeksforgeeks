@@ -14,8 +14,22 @@ package com.codingthrough.geeksforgeeks.ds.linkedlist.singly;
  * of nodes in first list.
  * <p>
  */
-public class MergeListsAtAlternatePositions {
-    private static <T> void merge(Node<T> a, Node<T> b) {
+public class MergeAtAlternatePositions {
+    public static <T> Node<T> merge(Node<T> a, Node<T> b) {
+        Node<T> dummy = new Node<>(null, null);
+        Node<T> prev = dummy;
+        while (a != null && b != null) {
+            prev.next = a;
+            a = a.next;
+            prev = prev.next;
 
+            prev.next = b;
+            b = b.next;
+            prev = prev.next;
+
+            prev.next = null;
+        }
+
+        return dummy.next;
     }
 }

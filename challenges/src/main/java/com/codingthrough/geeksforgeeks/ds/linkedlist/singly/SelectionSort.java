@@ -1,7 +1,7 @@
 package com.codingthrough.geeksforgeeks.ds.linkedlist.singly;
 
 /**
- * Selects the specified linked list using selection sort algorithm.
+ * Sorts the specified linked list using selection sort algorithm.
  */
 public class SelectionSort {
     public static <T extends Comparable<T>> Node<T> sort(Node<T> head) {
