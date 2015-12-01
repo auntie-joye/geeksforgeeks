@@ -30,9 +30,16 @@ public class SortAlternateSortingTest extends TestSupport {
     }
 
     @Test
-    public void canSortAlternateSorted() {
+    public void canSortAlternateSortedWithOddElements() {
         Node<Integer> head = buildLinkedList(1, 17, 3, 15, 6, 7, 12, 5, 21);
         Node<Integer> expected = buildLinkedList(1, 3, 5, 7, 6, 12, 15, 17, 21);
+        assertThat(SortAlternateSorting.sort(head), identicalTo(head));
+    }
+
+    @Test
+    public void canSortAlternateSortedWithEvenElements() {
+        Node<Integer> head = buildLinkedList(1, 17, 3, 15, 6, 7, 12, 5);
+        Node<Integer> expected = buildLinkedList(1, 3, 5, 7, 6, 12, 15, 17);
         assertThat(SortAlternateSorting.sort(head), identicalTo(head));
     }
 }
