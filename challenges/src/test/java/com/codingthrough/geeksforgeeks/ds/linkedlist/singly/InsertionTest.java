@@ -87,4 +87,137 @@ public class InsertionTest extends TestSupport {
         Insertion.insertAfter(middle, 4);
         assertThat(head, identicalTo(expected));
     }
+
+    @Test
+    public void throwWhenInsertBeforeNullNode() {
+        Node<Integer> head = buildLinkedList(1);
+        try {
+            Insertion.insertBefore(head, null, 0);
+            fail("Should throw when insert before null node.");
+        } catch (IllegalArgumentException e) {
+            // ok, it's expected exception
+        }
+    }
+
+    @Test
+    public void throwWhenInsertBeforeInEmptyList() {
+        Node<Integer> node = buildLinkedList(1);
+
+        try {
+            Insertion.insertBefore(null, node, 2);
+            fail("Should throw when insert before in empty list.");
+        } catch (IllegalArgumentException e) {
+            // ok, it's expected exception
+        }
+    }
+
+    @Test
+    public void throwWhenInsertBeforeNotFoundNode() {
+        Node<Integer> head = buildLinkedList(1, 2, 3);
+        Node<Integer> node = buildLinkedList(4);
+
+        try {
+            Insertion.insertBefore(head, node, 4);
+            fail("Should throw when insert before not found node.");
+        } catch (IllegalStateException e) {
+            // ok, it's expected exception
+        }
+    }
+
+    @Test
+    public void canDeleteBeforeMiddleNode() {
+        Node<Integer> head = buildLinkedList(0, 1, 3, 4, 5);
+        Node<Integer> middle = head.next.next;
+        Node<Integer> expected = buildLinkedList(0, 1, 2, 3, 4, 5);
+
+        assertThat(Insertion.insertBefore(head, middle, 2), identicalTo(expected));
+    }
+
+    @Test
+    public void canDeleteBeforeHeadNode() {
+        Node<Integer> head = buildLinkedList(2, 3, 4, 5);
+        Node<Integer> expected = buildLinkedList(1, 2, 3, 4, 5);
+
+        assertThat(Insertion.insertBefore(head, head, 1), identicalTo(expected));
+    }
+
+    @Test
+    public void canInsertBeforeLastNode() {
+        Node<Integer> head = buildLinkedList(1, 2, 4);
+        Node<Integer> last = head.next.next;
+        Node<Integer> expected = buildLinkedList(1, 2, 3, 4);
+
+        assertThat(Insertion.insertBefore(head, last, 3), identicalTo(expected));
+    }
+
+    @Test
+    public void throwWhenInsertWithPositionLessMinimumIndex() {
+        Node<Integer> head = buildLinkedList(1);
+
+        try {
+            Insertion.insertAt(head, -1, 0);
+            fail("Should throw when try to insert with negative position.");
+        } catch (IndexOutOfBoundsException e) {
+            // ok, it's expected exception
+        }
+    }
+
+    @Test
+    public void throwWhenInsertWithPositionGreaterMaximumIndex() {
+        Node<Integer> head = buildLinkedList(1, 2, 3);
+
+        try {
+            Insertion.insertAt(head, 4, 4);
+            fail("Should throw when try to insert with greater position.");
+        } catch (IndexOutOfBoundsException e) {
+            // ok, it's expected exception
+        }
+    }
+
+    @Test
+    public void canInsertFirstElementToEmptyList() {
+        Node<Integer> expected = buildLinkedList(4);
+
+        assertThat(Insertion.insertAt(null, 0, 4), identicalTo(expected));
+    }
+
+    @Test
+    public void canInsertFirstElementToList() {
+        Node<Integer> head = buildLinkedList(4, 3, 2, 1);
+        Node<Integer> expected = buildLinkedList(5, 4, 3, 2, 1);
+
+        assertThat(Insertion.insertAt(head, 0, 5), identicalTo(expected));
+    }
+
+    @Test
+    public void canInsertPostFirstElementToList() {
+        Node<Integer> head = buildLinkedList(5, 3, 2, 1);
+        Node<Integer> expected = buildLinkedList(5, 4, 3, 2, 1);
+
+        assertThat(Insertion.insertAt(head, 1, 4), identicalTo(expected));
+    }
+
+    @Test
+    public void canInsertLastElementToList() {
+        Node<Integer> head = buildLinkedList(4, 3, 2, 1);
+        Node<Integer> expected = buildLinkedList(4, 3, 2, 1, 0);
+
+        assertThat(Insertion.insertAt(head, 4, 0), identicalTo(expected));
+    }
+
+    @Test
+    public void canInsertPreLastElementToList() {
+        Node<Integer> head = buildLinkedList(4, 3, 2, 0);
+        Node<Integer> expected = buildLinkedList(4, 3, 2, 1, 0);
+
+        assertThat(Insertion.insertAt(head, 3, 1), identicalTo(expected));
+    }
+
+    @Test
+    public void canInsertMiddleElementToList() {
+        Node<Integer> head = buildLinkedList(1, 2, 4, 5, 6);
+        Node<Integer> expected = buildLinkedList(1, 2, 3, 4, 5, 6);
+
+        assertThat(Insertion.insertAt(head, 2, 3), identicalTo(expected));
+    }
 }

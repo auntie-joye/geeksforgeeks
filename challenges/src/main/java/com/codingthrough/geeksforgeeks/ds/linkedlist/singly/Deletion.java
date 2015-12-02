@@ -95,8 +95,12 @@ public class Deletion {
             throw new IllegalArgumentException("There is no element to be deleted.");
         }
 
-        Node<T> cur = head;
+        Node<T> dummy = new Node<>(null, head);
+
+        Node<T> prev = dummy;
+        Node<T> cur = dummy.next;
         while (cur != null && cur.next != node) {
+            prev = cur;
             cur = cur.next;
         }
 
@@ -104,9 +108,9 @@ public class Deletion {
             throw new IllegalStateException("The specified node is not found in the specified linked list.");
         }
 
-        deleteAfter(cur);
+        deleteAfter(prev);
 
-        return head;
+        return dummy.next;
     }
 
     /**
@@ -119,7 +123,7 @@ public class Deletion {
      * @throws IndexOutOfBoundsException if the specified position is out of bounds on the linked list
      */
     public static <T> Node<T> deleteAt(Node<T> head, int pos) {
-        if (pos < 0) {
+        if (pos < 0 || head == null) {
             throw new IndexOutOfBoundsException("The specified position is less than the minimal list index.");
         }
 
@@ -127,17 +131,17 @@ public class Deletion {
             return deleteFirst(head);
         }
 
-        Node<T> cur = head;
-        while (cur != null && pos > 1) {
-            cur = cur.next;
+        Node<T> prev = head;
+        while (prev != null && pos > 1) {
+            prev = prev.next;
             pos--;
         }
 
-        if (cur == null) {
+        if (prev == null || prev.next == null) {
             throw new IndexOutOfBoundsException("The specified position is greater than the maximum list index.");
         }
 
-        deleteAfter(cur);
+        deleteAfter(prev);
         return head;
     }
 
@@ -159,16 +163,16 @@ public class Deletion {
             return deleteFirst(head);
         }
 
-        Node<T> cur = head;
-        while (cur != null && !data.equals(cur.next.data)) {
-            cur = cur.next;
+        Node<T> prev = head;
+        while (prev.next != null && !data.equals(prev.next.data)) {
+            prev = prev.next;
         }
 
-        if (cur == null) {
+        if (prev.next == null) {
             throw new IllegalStateException("The specified node is not found in the specified linked list.");
         }
 
-        deleteAfter(cur);
+        deleteAfter(prev);
 
         return head;
     }

@@ -48,18 +48,18 @@ public class GetElementFromTail {
      *                                   than list minimum/maximum index respectively.
      */
     public static <T> T getAtRecursive(Node<T> head, int pos) {
-        if (pos < 0) {
-            throw new IndexOutOfBoundsException("The specified index is leass than the list minimum element index.");
+        if (pos < 0 || head == null) {
+            throw new IndexOutOfBoundsException("The specified index is less than the list minimum element index.");
         }
         return getAtRecursive(head, head, pos);
     }
 
     private static <T> T getAtRecursive(Node<T> node, Node<T> last, int pos) {
-        if (pos > 0) {
-            if (last == null) {
-                throw new IndexOutOfBoundsException("The specified index is greater than the list maximum element index.");
-            }
+        if (last == null) {
+            throw new IndexOutOfBoundsException("The specified index is greater than the list maximum element index.");
+        }
 
+        if (pos > 0) {
             return getAtRecursive(node, last.next, --pos);
         }
 
